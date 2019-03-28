@@ -2,9 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #register {
+            padding-top: 200px;
+            line-height: 40px;
+            text-align: center;
+        }
+        #register_form {
+            overflow: hidden;
+        }
+        #register img {
+            margin-top: -25px;
+            width: 360px;
+        }
+        .form-group {
+            font-size: 20px;
+            margin-top: 2%;
+        }
+        .form-group input {
+            width: 30%;
+            height: 40px;
+            padding-left: 1rem;
+            float: right;
+            margin-right: 28%;
+        }
+        .register_button {
+            margin-top: 2%;
+            letter-spacing: 2rem;
+        }
+        .register_button .sign_up, .back {
+            width: 6%;
+            font-size: 19px;
+            padding: 5px;
+            border: 0;
+            border-radius: 4px;
+        }
+        .register_button .sign_up {
+            background-color: #6fc1ff;
+        }
+    </style>
 </head>
 <body>
+<div class="register" id="register">
+    <img src="../public/img/biaoti.png" alt="">
+    <form method="post" id="register_form" action="/register">
+        <div class="form-group">
+            <label for="email" style="margin-right: -30%;">邮箱：</label>
+            <input type="email" class="form-input" id="email" name="email" placeholder="email">
+        </div>
+        <div class="form-group">
+            <label for="nickname" style="margin-right: -29%;">用户名：</label>
+            <input type="nickname" class="form-input" id="nickname" name="nickname" placeholder="nickname">
+        </div>
+        <div class="form-group">
+            <label for="password" style="margin-right: -30%;">密码：</label>
+            <input type="password" class="form-input" id="password" name="password" placeholder="password">
+        </div>
+        <div class="form-group">
+            <label for="password_again" style="margin-right: -28%;">确认密码：</label>
+            <input type="password" class="form-input" id="password_again" name="password_again" placeholder="password_again">
+        </div>
+    </form>
+    <div class="register_button">
+        <button type="button" id="submit" class="sign_up" onclick="commit()">注册</button>
+        <button type="button" class="back" onclick="window.history.back()">返回</button>
+    </div>
+</div>
 
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    window.commit = function () {
+        var password = document.getElementById('password').value;
+        var password_again = document.getElementById('password_again').value;
+        if (password != password_again){
+            alert('密码不一致');
+        }
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: $('#register_form').serialize(),
+            dataType: 'json',
+            success: function (data) {
+                // console.log(data)
+                var err_code = data.err_code;
+                if (err_code === 0) {
+                    window.alert('注册成功');
+                    window.location.href = '/'
+                } else if (err_code === 1) {
+                    window.alert('邮箱或昵称已存在');
+                } else if (err_code === 500) {
+                    window.alert('服务器繁忙，请稍后再试')
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="../public/css/style.css">
 </head>
 <body>
-<div clss="total">
+<div class="total">
     <div id="header" class="header" style="background: url(../public/img/carousel.jpg) no-repeat;">
-        <span>Hi:</span>
+        {{ if user }}
+        <span>Hi: {{ user.nickname }}</span>
+        <a href="logout">退出</a>
+        {{ else }}
         <a href="login">登录</a>
         <a href="register">注册</a>
+        {{ /if }}
     </div>
     <div id="nav" class="nav">
         <button id="home_page">留⾔⾸⻚</button>
@@ -63,7 +67,7 @@
             <a href="javascript:;">河北经贸⼤学</a>
         </div>
         <div class="addButton">
-            <a href="add.html" class="add"><span>&#0043</span>写新留⾔</a>
+            <a href="add" class="add"><span>&#0043</span>写新留⾔</a>
         </div>
         <div class="orgName">
             <span>河北经贸⼤学</span>
@@ -77,47 +81,47 @@
             <a href="javascript:;">我的留⾔</a>
         </div>
         <div class="booklist">
+            {{ each comments}}
             <div class="face">
                 <span></span>
-                <p>Lily</p>
+                <p>{{ comment.nickname }}</p>
             </div>
             <div class="content">
                 <h3>
-                    <span class="number">留⾔编号: <a href="#">000000002</a> </
-                    span>
-                    <span class="date">⽇期: 2019-01-29 &nbsp;&nbsp;14:18:30 </
-                    span>
+                    <span class="number">留⾔编号: <a href="#">000000002</a> </span>
+                    <span class="date">⽇期: {{ comment.dateTime }} </span>
                 </h3>
                 <h2>
-                    <span>标题: </span>
-                    <a href="#">好，真好，⾮常好</a>
+                    <span>标题: {{ comment.title }}</span>
+                    <a href="#"></a>
                 </h2>
-                <p>content</p>
+                <p>{{ comment.content }}</p>
                 <textarea name="" id="" cols="30" rows="10"></textarea>
                 <button id="comment" class="comment">评论</button>
             </div>
+            {{ /each }}
         </div>
-        <div class="booklist">
-            <div class="face">
-                <span></span>
-                <p>Lily</p>
-            </div>
-            <div class="content">
-                <h3>
-                    <span class="number">留⾔编号: <a href="#">000000001</a> </
-                    span>
-                    <span class="date">⽇期: 2019-01-29 &nbsp;&nbsp;10:34:07</
-                    span>
-                </h3>
-                <h2>
-                    <span>标题: </span>
-                    <a href="#">好，真好</a>
-                </h2>
-                <p>content</p>
-                <textarea></textarea>
-                <button class="comment">评论</button>
-            </div>
-        </div>
+        <!--<div class="booklist">-->
+            <!--<div class="face">-->
+                <!--<span></span>-->
+                <!--<p>Lily</p>-->
+            <!--</div>-->
+            <!--<div class="content">-->
+                <!--<h3>-->
+                    <!--<span class="number">留⾔编号: <a href="#">000000001</a> </-->
+                    <!--span>-->
+                    <!--<span class="date">⽇期: 2019-01-29 &nbsp;&nbsp;10:34:07</-->
+                    <!--span>-->
+                <!--</h3>-->
+                <!--<h2>-->
+                    <!--<span>标题: </span>-->
+                    <!--<a href="#">好，真好</a>-->
+                <!--</h2>-->
+                <!--<p>content</p>-->
+                <!--<textarea></textarea>-->
+                <!--<button class="comment">评论</button>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="page">
             10条记录 1/5 ⻚
             <a href="javascript:;">&lt;&lt;上⼀⻚</a>
@@ -133,7 +137,7 @@
 </div>
 </body>
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="../public/js/tools.js"></script>
+<!--<script type="text/javascript" src="../public/js/tools.js"></script>-->
 <script>
     $(document).ready(function(){
         $("#college_span").click(function(){
