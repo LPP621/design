@@ -22,7 +22,8 @@ app.use(session({
     // 配置加密字符串
     secret: 'itcast',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {secure: false}
 }));
 
 // 把路由挂载到 app 中

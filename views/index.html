@@ -18,49 +18,12 @@
     </div>
     <div id="nav" class="nav">
         <button id="home_page">留⾔⾸⻚</button>
-        <form id="search" class="search" method="post">
-            <button id="key" class="key">关键字</button>
-            <input type="text" name="key" class="input" value="">
-            <input type="submit" value="搜索" class="btn_search" id="btn_search">
-        </form>
+        <!--<form id="search" class="search" method="post">-->
+            <!--<button id="key" class="key">关键字</button>-->
+            <!--<input type="text" name="key" class="input" value="">-->
+            <!--<input type="submit" value="搜索" class="btn_search" id="btn_search">-->
+        <!--</form>-->
     </div>
-    <!--<div class="treeBar">-->
-        <!--<ul class="tree">-->
-            <!--&lt;!&ndash; 学校包括四个校区，到时候存在数据库中或者存在 js 数组中 &ndash;&gt;-->
-            <!--<li class="tree_li">-->
-                <!--<a id="college_span" class="span" href="javascript:;">学院 <span-->
-                        <!--id="icon_c" class="icon_up"></span></a>-->
-                <!--<dl id="college" style="display: none">-->
-                    <!--<dd><a href="javascript:;">会计学院</a></dd>-->
-                    <!--<dd><a href="javascript:;">法学院</a></dd>-->
-                    <!--<dd><a href="javascript:;">⾦融学院</a></dd>-->
-                    <!--<dd><a href="javascript:;">数学与统计学院</a></dd>-->
-                    <!--<dd><a href="javascript:;">⼯商管理学院</a></dd>-->
-                <!--</dl>-->
-            <!--</li>-->
-            <!--<li class="tree_li">-->
-                <!--<a id="restaurant_span" class="span" href="javascript:;">餐厅<span-->
-                        <!--id="icon_r" class="icon_up"></span></a>-->
-                <!--<dl id="restaurant" style="display: none">-->
-                    <!--<dd><a href="javascript:;">⼀餐</a></dd>-->
-                    <!--<dd><a href="javascript:;">⼆餐</a></dd>-->
-                    <!--<dd><a href="javascript:;">三餐</a></dd>-->
-                <!--</dl>-->
-            <!--</li>-->
-            <!--<li class="tree_li">-->
-                <!--<a href="javascript:;">教学楼</a>-->
-            <!--</li>-->
-            <!--<li class="tree_li">-->
-                <!--<a href="javascript:;">图书馆</a>-->
-            <!--</li>-->
-            <!--<li class="tree_li">-->
-                <!--<a href="javascript:;">宿舍</a>-->
-            <!--</li>-->
-            <!--<li class="tree_li">-->
-                <!--<a href="javascript:;">其他</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
     <div class="main">
         <div class="position">
             <a href="javascript:;">留⾔⾸⻚ >>></a>
@@ -80,48 +43,27 @@
             <a href="javascript:;">回复我的</a>
             <a href="javascript:;">我的留⾔</a>
         </div>
+        {{ each comments}}
         <div class="booklist">
-            {{ each comments}}
             <div class="face">
-                <span></span>
-                <p>{{ comment.nickname }}</p>
+                <span><img src="../public/img/avatar-default.png" alt=""></span>
+                <p>{{ $value.nickname }}</p>
             </div>
             <div class="content">
                 <h3>
-                    <span class="number">留⾔编号: <a href="#">000000002</a> </span>
-                    <span class="date">⽇期: {{ comment.dateTime }} </span>
+                    <span class="number">留⾔编号: <a href="#">{{ $index +1}}</a> </span>
+                    <span class="date">⽇期: {{ $value.dateTime }} </span>
                 </h3>
                 <h2>
-                    <span>标题: {{ comment.title }}</span>
+                    <span>标题: {{ $value.title }}</span>
                     <a href="#"></a>
                 </h2>
-                <p>{{ comment.content }}</p>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <button id="comment" class="comment">评论</button>
+                <p>{{ $value.content }}</p>
+                <!--<textarea name="" id="" cols="30" rows="10"></textarea>-->
+                <!--<button id="comment" class="comment">评论</button>-->
             </div>
-            {{ /each }}
         </div>
-        <!--<div class="booklist">-->
-            <!--<div class="face">-->
-                <!--<span></span>-->
-                <!--<p>Lily</p>-->
-            <!--</div>-->
-            <!--<div class="content">-->
-                <!--<h3>-->
-                    <!--<span class="number">留⾔编号: <a href="#">000000001</a> </-->
-                    <!--span>-->
-                    <!--<span class="date">⽇期: 2019-01-29 &nbsp;&nbsp;10:34:07</-->
-                    <!--span>-->
-                <!--</h3>-->
-                <!--<h2>-->
-                    <!--<span>标题: </span>-->
-                    <!--<a href="#">好，真好</a>-->
-                <!--</h2>-->
-                <!--<p>content</p>-->
-                <!--<textarea></textarea>-->
-                <!--<button class="comment">评论</button>-->
-            <!--</div>-->
-        <!--</div>-->
+        {{ /each }}
         <div class="page">
             10条记录 1/5 ⻚
             <a href="javascript:;">&lt;&lt;上⼀⻚</a>
@@ -136,18 +78,8 @@
     </div>
 </div>
 </body>
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-<!--<script type="text/javascript" src="../public/js/tools.js"></script>-->
+<script src="../node_modules/jquery/dist/jquery.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#college_span").click(function(){
-            $("#college").toggle();
-            toggleClass(icon_c,"icon_down");
-        });
-        $("#restaurant_span").click(function(){
-            $("#restaurant").toggle();
-            toggleClass(icon_r,"icon_down");
-        });
-    });
+
 </script>
 </html>

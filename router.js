@@ -6,10 +6,20 @@ var md5 = require('blueimp-md5');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.render('index.html', {
-        user: req.session.user,
-        comment: req.session.comment
-    })
+    // console.log(Comment);
+    Comment.find(function (err, comments) {
+        if (err) {
+            return res.status(500).send('Server error')
+        }
+        res.render('index.html',{
+            user: req.session.user,
+            comments: comments
+        })
+        // res.render('index.html', {
+        //     user: req.session.user,
+        //     comment: req.session.comment
+        // });
+    });
 });
 
 router.get('/login', function (req, res) {
@@ -114,21 +124,13 @@ router.get('/add', function (req, res) {
    })
 });
 router.post('/add', function (req, res) {
-    // console.log(req.body);
-    var comment = req.body;
-    var date = new Date();
-    comment.dateTime = date;
-    console.log(comment);
-    console.log(comment.nickname);
-    console.log(comment.dateTime);
-    // var date = new Date();
+    console.log(req.body);
+    // var myDate = new Date();
+    // var date = myDate.getFullYear() +'-'+(myDate.getMonth()+1)+'-'+myDate.getDate();
     // comment.dateTime = date;
-    // comment.unshift(comment);
-    // res.redirect('/');
-    new Comment(comment).save(function (err, comment) {
+    new Comment(req.body).save(function (err, comment) {
         // 服务器错误
         if (err) {
-            // console.log(err)
             return res.status(500).json({
                 err_code: 500,
                 message: 'Internal error'
@@ -136,6 +138,7 @@ router.post('/add', function (req, res) {
         }
         // 评论成功，使用 session 记录用评论信息
         req.session.comment = comment;
+        console.log(comment);
         res.status(200).json({
             err_code: 0,
             message: 'ok'
